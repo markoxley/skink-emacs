@@ -107,5 +107,37 @@ level; a leading closer or `case'/`default' label removes one."
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.skink\\'" . skink-mode))
 
+;;; Language server (skink-lsp over stdio)
+;; skink-lsp provides completion, hover, diagnostics, definition,
+;; references, rename, formatting and semantic tokens.  Both eglot
+;; (built-in since Emacs 29) and lsp-mode are wired automatically.
+
+(defcustom skink-lsp-program '("skink-lsp")
+  "Command used to start the Skink language server."
+  :type '(repeat string)
+  :group 'skink)
+
+;;;###autoload
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               `(skink-mode . ,skink-lsp-program)))
+
+;;;###autoload
+(defun skink-eglot-ensure ()
+  "Start eglot for the current `skink-mode' buffer."
+  (interactive)
+  (require 'eglot)
+  (eglot-ensure))
+
+;;; lsp-mode registration (only when lsp-mode is installed)
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(skink-mode . "skink"))
+  (when (fboundp 'lsp-register-client)
+    (lsp-register-client
+     (make-lsp-client
+      :new-connection (lsp-stdio-connection (lambda () skink-lsp-program))
+      :major-modes '(skink-mode)
+      :server-id 'skink-lsp))))
+
 (provide 'skink-mode)
 ;;; skink-mode.el ends here

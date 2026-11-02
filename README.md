@@ -91,3 +91,16 @@ or via `M-x customize-group RET skink RET`.
 ## Limitations
 
 This is intentionally a basic mode — it does not provide LSP integration, completion, formatting, or navigation. Indentation is a simple heuristic based on the previous nonblank line.
+
+## Language Server (LSP)
+
+`skink-mode` registers `skink-lsp` with both **eglot** (built-in since
+Emacs 29) and **lsp-mode** automatically when either is loaded — no
+extra config beyond having `skink-lsp` on `PATH` (or set
+`skink-lsp-program` for a custom binary path).
+
+- eglot: `M-x eglot` in a `.skink` buffer (or `M-x skink-eglot-ensure`)
+- lsp-mode: `M-x lsp` in a `.skink` buffer
+
+Server features: completion, hover, diagnostics, go-to-definition,
+references, rename, formatting, semantic tokens.
