@@ -17,39 +17,29 @@ This is a minimal plugin that provides:
 
 ## Installation
 
-`skink-mode` is not on MELPA or any other package archive, so install it manually.
+`skink-mode` is not on MELPA, but it can be installed directly from
+[GitHub](https://github.com/markoxley/skink-emacs) — or copied manually.
 
-### Manual installation
+### package-vc-install (Emacs 29+)
 
-1. Copy `skink-mode.el` somewhere on your `load-path`, e.g.:
+```elisp
+(package-vc-install "https://github.com/markoxley/skink-emacs")
+```
 
-   ```sh
-   mkdir -p ~/.emacs.d/lisp
-   cp skink-mode.el ~/.emacs.d/lisp/
-   ```
-
-2. Add the following to your init file (`~/.emacs`, `~/.emacs.d/init.el`, or `~/.config/emacs/init.el`):
-
-   ```elisp
-   (add-to-list 'load-path "~/.emacs.d/lisp")
-   (require 'skink-mode)
-   ```
-
-### use-package
-
-If you use `use-package`, point it at the file directly:
+### use-package `:vc` (Emacs 30+)
 
 ```elisp
 (use-package skink-mode
-  :load-path "~/path/to/skink-emacs"
+  :vc (:url "https://github.com/markoxley/skink-emacs"
+            :rev :newest)
   :mode "\\.skink\\'")
 ```
 
-Or with `straight.el`:
+### straight.el
 
 ```elisp
 (use-package skink-mode
-  :straight (:local-repo "~/path/to/skink-emacs")
+  :straight (:host github :repo "markoxley/skink-emacs")
   :mode "\\.skink\\'")
 ```
 
@@ -58,7 +48,7 @@ Or with `straight.el`:
 In `packages.el`:
 
 ```elisp
-(package! skink-mode :recipe (:local-repo "~/path/to/skink-emacs"))
+(package! skink-mode :recipe (:host github :repo "markoxley/skink-emacs"))
 ```
 
 In `config.el`:
@@ -67,6 +57,22 @@ In `config.el`:
 (use-package! skink-mode
   :mode "\\.skink\\'")
 ```
+
+### Manual installation
+
+1. Clone or download this repo and copy `skink-mode.el` somewhere on your
+   `load-path`, e.g.:
+
+   ```sh
+   git clone https://github.com/markoxley/skink-emacs ~/.emacs.d/skink-emacs
+   ```
+
+2. Add the following to your init file (`~/.emacs`, `~/.emacs.d/init.el`, or `~/.config/emacs/init.el`):
+
+   ```elisp
+   (add-to-list 'load-path "~/.emacs.d/skink-emacs")
+   (require 'skink-mode)
+   ```
 
 ## Usage
 

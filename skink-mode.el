@@ -1,5 +1,11 @@
 ;;; skink-mode.el --- Major mode for editing Skink source code -*- lexical-binding: t; -*-
 
+;; Author:  Mark Oxley
+;; URL:     https://github.com/markoxley/skink-emacs
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "25.1"))
+;; Keywords: languages, skink
+
 ;; File:    skink-mode.el
 ;; Purpose: Emacs major mode for the Skink programming language.
 ;;          Provides syntax highlighting, // comment handling, and
